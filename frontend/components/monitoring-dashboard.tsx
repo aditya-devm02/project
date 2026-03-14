@@ -189,7 +189,7 @@ export function MonitoringDashboard() {
             </p>
           </div>
           <div className="status-chip">
-            {loading ? "Loading live BMRS data" : "Live BMRS-backed response"}
+            {loading ? "Loading live BMRS data" : "Live BMRS"}
           </div>
         </div>
 
