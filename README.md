@@ -6,6 +6,15 @@ This repository implements the REint full stack challenge using:
 - `backend/`: FastAPI service that fetches live BMRS data and applies the horizon logic
 - `notebooks/`: Jupyter notebooks for forecast-error analysis and reliable wind-supply analysis
 
+## Repository contents
+
+- `frontend/app/`: Next.js pages, layout, styles, and server route
+- `frontend/components/`: UI components
+- `frontend/lib/`: client fetch helpers and shared wind-monitoring logic
+- `backend/app/`: FastAPI backend used for local/dev and notebook reuse
+- `notebooks/`: analysis notebooks requested by the challenge
+- `.git/`: full commit history for submission review
+
 ## What the app does
 
 - Pulls actual generation from `FUELHH` filtered to `fuelType=WIND`
@@ -17,6 +26,18 @@ This repository implements the REint full stack challenge using:
 - Renders a responsive line chart in Next.js
 
 ## Local setup
+
+### Frontend-only app
+
+```bash
+cd /Users/adityakumarsingh/Documents/project/frontend
+npm install
+npm run dev
+```
+
+Frontend default URL: `http://127.0.0.1:3000`
+
+The deployed Vercel app uses the Next.js server route at `/api/wind-monitoring`, so it does not require the FastAPI backend in production.
 
 ### Backend
 
@@ -30,22 +51,13 @@ uvicorn app.main:app --reload
 
 Backend default URL: `http://127.0.0.1:8000`
 
-### Frontend
-
-```bash
-cd /Users/adityakumarsingh/Documents/project/frontend
-npm install
-NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000 npm run dev
-```
-
-Frontend default URL: `http://127.0.0.1:3000`
-
 ## Deployment
 
 ### Frontend
 
-- Recommended target: Vercel
-- Set `NEXT_PUBLIC_API_BASE_URL` to your deployed backend URL
+- Platform: Vercel
+- Live app: https://frontend-five-green-68.vercel.app
+- The deployed app is self-contained and fetches BMRS data through the Next.js server route.
 
 ### Backend
 
@@ -56,7 +68,7 @@ Frontend default URL: `http://127.0.0.1:3000`
 uvicorn app.main:app --host 0.0.0.0 --port $PORT
 ```
 
-I could not complete a real Vercel/Heroku deployment from this workspace because deployment credentials are not available here. The codebase is prepared for deployment and verified locally against the live BMRS API.
+The standalone FastAPI backend remains in the repo for local development and analysis workflows.
 
 ## Notebooks
 
