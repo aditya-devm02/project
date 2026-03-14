@@ -1,0 +1,9 @@
+fastapi==0.115.12
+httpx==0.28.1
+uvicorn[standard]==0.34.0
+pandas==2.2.3
+jupyterlab==4.3.5
+matplotlib==3.10.1
+seaborn==0.13.2
+nbformat==5.10.4
+
