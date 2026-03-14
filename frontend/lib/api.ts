@@ -23,8 +23,7 @@ export type WindMonitoringResponse = {
   };
 };
 
-const apiBaseUrl =
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
 export async function fetchWindMonitoring(params: {
   startTime: string;
@@ -45,9 +44,15 @@ export async function fetchWindMonitoring(params: {
   );
 
   if (!response.ok) {
-    throw new Error(`Backend request failed with ${response.status}`);
+    let detail = `Backend request failed with ${response.status}`;
+    try {
+      const payload = (await response.json()) as { detail?: string };
+      if (payload.detail) {
+        detail = payload.detail;
+      }
+    } catch {}
+    throw new Error(detail);
   }
 
   return (await response.json()) as WindMonitoringResponse;
 }
-
